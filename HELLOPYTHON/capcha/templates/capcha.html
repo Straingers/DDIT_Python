@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="js/jquery-3.6.0.js"></script>
+</script>
+</head>
+<body>
+	<input type="button" onclick="capcha()" value="네이버 캡챠" /><br/><br/>
+	<img id="img_ing"><br/>
+	<div id="hideshow" style="display: none;">
+		<input type="text" id="userInput" value=""/> 
+		<input type="button" onclick="check()" value="전송"/> 
+	</div>
+	<input type="hidden" id="imgKey" value="" />
+	
+</body>
+<script type="text/javascript">
+	function capcha(){
+    	$.ajax({
+			type: 'post',
+			url: '/image',
+			dataType: 'json',
+			contentType: "application/json",
+			success: function(data){
+				console.log(data.key);
+				$("#imgKey").val(data.key);
+				$("#img_ing").attr("src", data.url);
+				$("#hideshow").show();
+			}
+		});
+    }
+	
+	function check(){
+		$.ajax({
+			type: 'get',
+			url: '/compare',
+			data: {
+				'imgkey' : $("#imgKey").val()
+				, 'value' : $("#userInput").val()
+			},
+			dataType: 'json',
+			contentType: "application/json",
+			success: function(data){
+				console.log(data.result);
+				if(data.result == true){
+					alert("인증 성공!");
+					location.reload();
+				} else {
+					alert("인증 실패!");
+					location.reload();
+				}
+			},
+			error: function(request, status, error){
+		        alert(error);
+		    }
+		});
+	}
+</script>
+</html>

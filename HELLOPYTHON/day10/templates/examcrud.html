@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>exam</title>
+<script src="js/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+	function fn_setTable(e_id, kor, eng, math){
+		document.getElementById("e_id").value = e_id;
+		document.getElementById("kor").value = kor;
+		document.getElementById("eng").value = eng;
+		document.getElementById("math").value = math;
+	}
+	
+	function fn_add(){
+		var param = {
+	            'e_id': document.getElementById("e_id").value
+	            , 'kor': document.getElementById("kor").value
+	            , 'eng': document.getElementById("eng").value
+	            , 'math': document.getElementById("math").value
+        };
+		console.log(param);
+        $.ajax({
+            type: 'POST',
+            url: 'add.exam',
+            data: JSON.stringify(param),
+            dataType : 'JSON',
+            contentType: "application/json",
+            success: function(data){
+				if(data.msg == "ok"){
+					alert("등록 성공!");
+					location.reload();
+				} else {
+					alert("실행도중 문제가 발생하였습니다.");
+				}
+            },
+            error: function(request, status, error){
+                alert('ajax 통신 실패');
+            }
+        });
+	}
+	
+	function fn_upd(){
+		if(document.getElementById("e_id").value == ""){
+			return;
+		}
+		var param = {
+	            'e_id': document.getElementById("e_id").value
+	            , 'kor': document.getElementById("kor").value
+	            , 'eng': document.getElementById("eng").value
+	            , 'math': document.getElementById("math").value
+        }
+        $.ajax({
+            type: 'POST',
+            url: 'upd.exam',
+            data: JSON.stringify(param),
+            dataType : 'JSON',
+            contentType: "application/json",
+            success: function(data){
+				if(data.msg == "ok"){
+					alert("수정 성공!");
+					location.reload();
+				} else {
+					alert("실행도중 문제가 발생하였습니다.");
+				}
+            },
+            error: function(request, status, error){
+                alert('ajax 통신 실패');
+            }
+        });
+	}
+	
+	function fn_del(){
+		if(document.getElementById("e_id").value == ""){
+			return;
+		}
+		if(!confirm("정말 삭제하시겠습니까?")){
+			return;
+		}
+		var param = {
+	            'e_id': document.getElementById("e_id").value
+        }
+        $.ajax({
+            type: 'POST',
+            url: 'del.exam',
+            data: JSON.stringify(param),
+            dataType : 'JSON',
+            contentType: "application/json",
+            success: function(data){
+				if(data.msg == "ok"){
+					alert("삭제 성공!");
+					location.reload();
+				} else {
+					alert("실행도중 문제가 발생하였습니다.");
+				}
+            },
+            error: function(request, status, error){
+                alert('ajax 통신 실패');
+            }
+        });
+	}
+</script>
+</head>
+<body>
+<div id="mylist" style="float: left; margin-right: 50px">
+		<table border="1">
+			<tr>
+				<th>아이디</th>
+				<th>국어</th>
+				<th>영어</th>
+				<th>수학</th>
+			</tr>
+			{% for exam in mylist %}
+			<tr>
+	        	<td>
+		        	<a href="javascript:fn_setTable('{{exam.e_id}}','{{exam.kor}}','{{exam.eng}}','{{exam.math}}')">
+		        	{{exam.e_id}}
+		        	</a>
+	        	</td>
+	        	<td>{{exam.kor}}</td>
+	        	<td>{{exam.eng}}</td>
+	        	<td>{{exam.math}}</td>
+	        </tr>
+		    {% endfor %}
+		</table>
+	</div>
+	<div id="mycrud" style="float: left;">
+		<table border="1">
+			<tr>
+				<td>아이디</td>
+				<td><input type="text" id="e_id" name="e_id" /></td>
+			</tr>
+			<tr>
+				<td>국어</td>
+				<td><input type="text" id="kor" name="kor" /></td>
+			</tr>
+			<tr>
+				<td>영어</td>
+				<td><input type="text" id="eng" name="eng" /></td>
+			</tr>
+			<tr>
+				<td>수학</td>
+				<td><input type="text" id="math" name="math" /></td>
+			</tr>
+			<tr>
+				<td colspan="4" align="center">
+					<input type="button" onclick="fn_add()" value="추가">
+					<input type="button" onclick="fn_upd()"value="수정">
+					<input type="button" onclick="fn_del()"value="삭제">
+				</td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

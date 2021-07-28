@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	{{title}}<br/>
+	{% for item in mylist %}
+        {{item}}<br/>
+    {% endfor %}<br/>
+	{% for obj in objlist %}
+        {{obj.e_id}} {{obj.e_name}} {{obj.birth}}<br/>
+    {% endfor %}
+</body>
+</html>

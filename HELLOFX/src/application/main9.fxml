@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane layoutX="14.0" layoutY="-14.0" prefHeight="333.0" prefWidth="385.0">
+         <children>
+            <TextField id="tf" layoutX="81.0" layoutY="72.0" prefHeight="23.0" prefWidth="224.0" />
+            <Button id="btn1" layoutX="100.0" layoutY="117.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="38.0" text="1" />
+            <Button id="btn2" layoutX="176.0" layoutY="117.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="38.0" text="2" />
+            <Button id="btn3" layoutX="247.0" layoutY="117.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="38.0" text="3" />
+            <Button id="btn6" layoutX="247.0" layoutY="160.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="38.0" text="6" />
+            <Button id="btn5" layoutX="176.0" layoutY="160.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="38.0" text="5" />
+            <Button id="btn4" layoutX="100.0" layoutY="160.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="38.0" text="4" />
+            <Button id="btn7" layoutX="100.0" layoutY="204.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="38.0" text="7" />
+            <Button id="btn8" layoutX="176.0" layoutY="204.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="38.0" text="8" />
+            <Button id="btn9" layoutX="247.0" layoutY="204.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="38.0" text="9" />
+            <Button id="btn0" layoutX="176.0" layoutY="248.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="38.0" text="0" />
+            <Button id="btnCall" layoutX="249.0" layoutY="248.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="38.0" text="Call" />
+            <Button id="btnDel" layoutX="100.0" layoutY="248.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="38.0" text="Del" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

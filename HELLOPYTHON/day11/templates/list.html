@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="js/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+	function fn_setTable(e_id, e_name, birth){
+		$("#e_id").val(e_id)
+		$("#e_name").val(e_name)
+		$("#birth").val(birth)
+	}
+	
+	function fn_add(){
+		var param = {
+	            'e_id': $("#e_id").val()
+	            , 'e_name': $("#e_name").val()
+	            , 'birth': $("#birth").val()
+        }
+        $.ajax({
+            type: 'POST',
+            url: 'add.ajax',
+            data: JSON.stringify(param),
+            dataType : 'JSON',
+            contentType: "application/json",
+            success: function(data){
+				console.log(data);
+				if(data.msg == "ok"){
+					alert("정상추가되었습니다.");
+					location.reload();
+				} else {
+					alert("실행도중 문제가 발생하였습니다.");
+				}
+            },
+            error: function(request, status, error){
+                alert('ajax 통신 실패');
+            }
+        });
+	}
+	
+	function fn_upd(){
+		var param = {
+	            'e_id': $("#e_id").val()
+	            , 'e_name': $("#e_name").val()
+	            , 'birth': $("#birth").val()
+        }
+        $.ajax({
+            type: 'POST',
+            url: 'upd.ajax',
+            data: JSON.stringify(param),
+            dataType : 'JSON',
+            contentType: "application/json",
+            success: function(data){
+				console.log(data);
+				if(data.msg == "ok"){
+					alert("정상수정되었습니다.");
+					location.reload();
+				} else {
+					alert("실행도중 문제가 발생하였습니다.");
+				}
+            },
+            error: function(request, status, error){
+                alert('ajax 통신 실패');
+            }
+        });
+	}
+	
+	function fn_del(){
+		var param = {
+	            'e_id': $("#e_id").val()
+        }
+        $.ajax({
+            type: 'POST',
+            url: 'del.ajax',
+            data: JSON.stringify(param),
+            dataType : 'JSON',
+            contentType: "application/json",
+            success: function(data){
+				console.log(data);
+				if(data.msg == "ok"){
+					alert("정상삭제되었습니다.");
+					location.reload();
+				} else {
+					alert("실행도중 문제가 발생하였습니다.");
+				}
+            },
+            error: function(request, status, error){
+                alert('ajax 통신 실패');
+            }
+        });
+	}
+</script>
+</head>
+<body>
+	<div id="mylist" style="float: left; margin-right: 50px">
+		<table border="1">
+			<tr>
+				<th>아이디</th>
+				<th>이름</th>
+				<th>생년월일</th>
+			</tr>
+			{% for emp in mylist %}
+			<tr>
+	        	<td>
+		        	<a href="javascript:fn_setTable('{{emp.e_id}}','{{emp.e_name}}','{{emp.birth}}')">
+		        	{{emp.e_id}}
+		        	</a>
+	        	</td>
+	        	<td>{{emp.e_name}}</td>
+	        	<td>{{emp.birth}}</td>
+	        </tr>
+		    {% endfor %}
+		</table>
+	</div>
+	<div id="mycrud" style="float: left;">
+		<table border="1">
+			<tr>
+				<td>아이디</td>
+				<td><input type="text" id="e_id" name="e_id" /></td>
+			</tr>
+			<tr>
+				<td>이름</td>
+				<td><input type="text" id="e_name" name="e_name" /></td>
+			</tr>
+			<tr>
+				<td>생년월일</td>
+				<td><input type="text" id="birth" name="birth" /></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+					<input type="button" onclick="fn_add()" value="추가">
+					<input type="button" onclick="fn_upd()"value="수정">
+					<input type="button" onclick="fn_del()"value="삭제">
+				</td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

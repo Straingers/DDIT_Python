@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="js/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+	function fn_ajax(){
+        var postdata = {
+            'e_id':'1', 'e_name':'1', 'birth':'1'
+        }
+        $.ajax({
+            type: 'POST',
+            url: 'ajax',
+            data: JSON.stringify(postdata),
+            dataType : 'JSON',
+            contentType: "application/json",
+            success: function(data){
+				console.log(data);
+            },
+            error: function(request, status, error){
+                alert('ajax 통신 실패');
+                alert(error);
+            }
+        });
+	}
+</script>
+</head>
+<body>
+	<a href="javascript:fn_ajax()">호출</a>
+</body>
+<script type="text/javascript">
+	$("#btn").click(function(){
+		
+	});
+</script>
+</html>
